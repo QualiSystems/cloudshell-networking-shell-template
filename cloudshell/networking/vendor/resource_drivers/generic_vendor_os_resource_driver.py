@@ -11,5 +11,10 @@ class generic_vendor_os_resource_driver(networking_generic_resource_driver):
                                                   "SNMP Version", "SNMP Read Community", "SNMP V3 User",
                                                   "SNMP V3 Password", "SNMP V3 Private Key"]})
     def Init(self, matrixJSON):
-        self.handler_name = 'os_name'
+        self.handler_name = 'DEFAULT_HANDLER_NAME'
         networking_generic_resource_driver.Init(self, matrixJSON)
+
+    # To suppress command just make them hidden
+    @DriverFunction(category='Hidden Commands')
+    def Add_VLAN(self, matrixJSON, ports, vlan_range, switchport_type, additional_info):
+        pass

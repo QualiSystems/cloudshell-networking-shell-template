@@ -5,11 +5,11 @@ from cloudshell.cli import expected_actions
 from cloudshell.networking.networking_handler_interface import NetworkingHandlerInterface
 from cloudshell.shell.core.handler_base import HandlerBase
 from cloudshell.networking.vendor.command_templates.template_interface import TemplateInterface
-from cloudshell.networking.vendor.autoload.template_snmp_autoload import TemplateSNMPAutoload
+from cloudshell.networking.vendor.autoload.template_snmp_autoload import BrocadeSNMPAutoload
 from cloudshell.api.cloudshell_api import CloudShellAPISession
 
 
-class GenericVendorOS(HandlerBase, NetworkingHandlerInterface):
+class GenericVendorHandler(HandlerBase, NetworkingHandlerInterface):
     # Here you can specify what action will be performed in case we got certain output from device:
     EXPECTED_MAP = {'Username: *$|Login: *$': expected_actions.send_username,
                     'closed by remote host': expected_actions.do_reconnect,
@@ -44,9 +44,8 @@ class GenericVendorOS(HandlerBase, NetworkingHandlerInterface):
         :param vlan_range: range of vlans to be added, if empty, and switchport_type = trunk,
         trunk mode will be assigned
         :param port_list: List of interfaces Resource Full Address
-        :param switchport_type: type of adding vlan ('trunk' or 'access')
+        :param port_mode: type of adding vlan ('trunk' or 'access')
         :param additional_info: contains QNQ or CTag parameter
-        :param remove: remove or add flag
         :return: success message
         :rtype: string
         """
@@ -58,16 +57,14 @@ class GenericVendorOS(HandlerBase, NetworkingHandlerInterface):
         self._logger.info('Vlan {0} was assigned to the interface {1}'.format(vlan_range, port_name))
         return 'Vlan Configuration Completed'
 
-
     def remove_vlan(self, vlan_range, port_list, port_mode, additional_info):
         """
         Remove Vlan on the remote device
         :param vlan_range: range of vlans to be added, if empty, and switchport_type = trunk,
         trunk mode will be assigned
         :param port_list: List of interfaces Resource Full Address
-        :param switchport_type: type of adding vlan ('trunk' or 'access')
+        :param port_mode: type of adding vlan ('trunk' or 'access')
         :param additional_info: contains QNQ or CTag parameter
-        :param remove: remove or add flag
         :return: success message
         :rtype: string
         """
@@ -111,7 +108,7 @@ class GenericVendorOS(HandlerBase, NetworkingHandlerInterface):
         """
         self._logger.info('************************************************************************')
         self._logger.info('Start SNMP discovery process .....')
-        generic_autoload = TemplateSNMPAutoload(self.snmp_handler, self._logger)
+        generic_autoload = BrocadeSNMPAutoload(self.snmp_handler, self._logger)
         result = generic_autoload.discover()
         self._logger.info('Start SNMP discovery Completed')
         return result
@@ -154,6 +151,6 @@ class GenericVendorOS(HandlerBase, NetworkingHandlerInterface):
         :param cmd: command you want to send
         :param expected_str: expected prompt
         :param timeout: timeout
-        :return:
+        :return: output from device / exception
         """
         pass
