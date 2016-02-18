@@ -1,2 +1,2 @@
 # cloudshell-networking-template
-SloudShell generic networking template
+CloudShell generic networking template
