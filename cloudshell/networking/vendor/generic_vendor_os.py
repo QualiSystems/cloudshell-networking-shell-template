@@ -38,9 +38,9 @@ class GenericVendorOS(HandlerBase, NetworkingHandlerInterface):
         return output.replace(' ', self.SPACE).replace('\r\n', self.NEWLINE).replace('\n', self.NEWLINE). \
             replace('\r', self.NEWLINE)
 
-    def configure_vlan(self, vlan_range, port_list, switchport_type, additional_info, remove=False):
+    def add_vlan(self, vlan_range, port_list, port_mode, additional_info):
         """
-        Sends snmp get command
+        Add Vlan on the remote device
         :param vlan_range: range of vlans to be added, if empty, and switchport_type = trunk,
         trunk mode will be assigned
         :param port_list: List of interfaces Resource Full Address
@@ -55,9 +55,28 @@ class GenericVendorOS(HandlerBase, NetworkingHandlerInterface):
         port_name = 'name'
         params_map['template_command'] = port_name
         self.configure_port(**params_map)
-        if remove:
-            self._logger.info('All vlans and interface mode were removed from the interface {0}'.format(port_name))
         self._logger.info('Vlan {0} was assigned to the interface {1}'.format(vlan_range, port_name))
+        return 'Vlan Configuration Completed'
+
+
+    def remove_vlan(self, vlan_range, port_list, port_mode, additional_info):
+        """
+        Remove Vlan on the remote device
+        :param vlan_range: range of vlans to be added, if empty, and switchport_type = trunk,
+        trunk mode will be assigned
+        :param port_list: List of interfaces Resource Full Address
+        :param switchport_type: type of adding vlan ('trunk' or 'access')
+        :param additional_info: contains QNQ or CTag parameter
+        :param remove: remove or add flag
+        :return: success message
+        :rtype: string
+        """
+        self._logger.info('Vlan Configuration Started')
+        params_map = dict()
+        port_name = 'name'
+        params_map['template_command'] = port_name
+        self.configure_port(**params_map)
+        self._logger.info('All vlans and interface mode were removed from the interface {0}'.format(port_name))
         return 'Vlan Configuration Completed'
 
     def cloud_shell_api(self):
