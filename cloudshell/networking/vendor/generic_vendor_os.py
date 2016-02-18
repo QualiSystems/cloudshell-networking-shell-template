@@ -2,13 +2,14 @@ __author__ = 'g8y3e'
 import socket
 
 from cloudshell.cli import expected_actions
-from cloudshell.networking.networking_handler_base import NetworkingHandlerBase
+from cloudshell.networking.networking_handler_interface import NetworkingHandlerInterface
+from cloudshell.shell.core.handler_base import HandlerBase
 from cloudshell.networking.vendor.command_templates.template_interface import TemplateInterface
 from cloudshell.networking.vendor.autoload.template_snmp_autoload import TemplateSNMPAutoload
 from cloudshell.api.cloudshell_api import CloudShellAPISession
 
 
-class GenericVendorOS(NetworkingHandlerBase):
+class GenericVendorOS(HandlerBase, NetworkingHandlerInterface):
     # Here you can specify what action will be performed in case we got certain output from device:
     EXPECTED_MAP = {'Username: *$|Login: *$': expected_actions.send_username,
                     'closed by remote host': expected_actions.do_reconnect,
@@ -24,7 +25,7 @@ class GenericVendorOS(NetworkingHandlerBase):
     NEWLINE = '<QS_LF>'
 
     def __init__(self, connection_manager, logger=None):
-        NetworkingHandlerBase.__init__(connection_manager, logger)
+        HandlerBase.__init__(self, connection_manager, logger)
         self._prompt = '.*[>#] *$'
         self.snmp_handler = None
 
