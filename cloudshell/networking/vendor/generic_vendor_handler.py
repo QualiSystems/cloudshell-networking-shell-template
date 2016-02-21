@@ -5,7 +5,7 @@ from cloudshell.cli import expected_actions
 from cloudshell.networking.networking_handler_interface import NetworkingHandlerInterface
 from cloudshell.shell.core.handler_base import HandlerBase
 from cloudshell.networking.vendor.command_templates.template_interface import TemplateInterface
-from cloudshell.networking.vendor.autoload.template_snmp_autoload import BrocadeSNMPAutoload
+from cloudshell.networking.vendor.autoload.template_snmp_autoload import TemplateSNMPAutoload
 from cloudshell.api.cloudshell_api import CloudShellAPISession
 
 
