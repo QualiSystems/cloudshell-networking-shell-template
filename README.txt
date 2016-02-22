@@ -1,0 +1,1 @@
+Template for cloudshell package powered by QualiSystems
