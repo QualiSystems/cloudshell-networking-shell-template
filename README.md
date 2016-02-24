@@ -1,2 +1,1 @@
-# cloudshell-networking-template
-CloudShell generic networking template
+# cloudshell-networking-shell-template
