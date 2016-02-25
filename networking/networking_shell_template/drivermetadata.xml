@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Driver Name="Sample driver" Version="1.0.0" MainClass="networking_shell_template.NetworkingShellTemplate" Description="driver description">
-  <Layout>
-    <Category Name="Management">
-      <Command Name="send_custom_command" DisplayName="Send Custom Command" Description="show run">
-        <Parameters>
-          <Parameter Name="user_param1" Type="String" Mandatory = "False" DefaultValue="default" DisplayName="parameter 1" Description="Please specify a value here"/>
-          <Parameter Name="user_param2" Type="Lookup" Mandatory = "True" DefaultValue="Yes" AllowedValues="Yes,No" DisplayName="parameter 2" Description="Just another parameter"/>
-        </Parameters>
-      </Command>
-    </Category>
-    <Category Name="Hidden Commands">
-      <!-- All the commands listed under the "hidden commands" category will not be visible in the user interface, you can still call them from automation -->
-    </Category>
-    <Command Name="add_vlan" DisplayName="Add_VLAN" Description=""></Command>
-  </Layout>
+<Driver Name="Sample driver" Version="1.0.0" MainClass="networking_shell_template.NetworkingShellTemplate"
+        Description="driver description">
+    <Layout>
+        <Category Name="Management">
+            <Command Name="send_custom_config_command" DisplayName="Send Custom Config Command" Description="show run">
+                <Parameters>
+                    <Parameter Name="user_param1" Type="String" Mandatory="False" DefaultValue="default"
+                               DisplayName="parameter 1" Description="Please specify a value here"/>
+                    <Parameter Name="user_param2" Type="Lookup" Mandatory="True" DefaultValue="Yes"
+                               AllowedValues="Yes,No" DisplayName="parameter 2" Description="Just another parameter"/>
+                </Parameters>
+            </Command>
+
+        </Category>
+        <Category Name="Hidden Commands">
+            <!-- All the commands listed under the "hidden commands" category will not be visible in the user interface, you can still call them from automation -->
+            <Command Name="add_vlan" DisplayName="Add_VLAN" Description=""></Command>
+            <Command Name="remove_vlan" DisplayName="Remove_VLAN" Description=""></Command>
+            <Command Name="apply_connectivity_changes" DisplayName="Apply Connectivity Changes" Description=""></Command>
+        </Category>
+        <Command Name="send_custom_command" DisplayName="Send Custom Command" Description=""/>
+        <Command Name="save" DisplayName="Save" Description=""/>
+        <Command Name="shutdown" DisplayName="Shutdown" Description=""/>
+        <Command Name="restore" DisplayName="Restore" Description=""/>
+        <Command Name="get_inventory" DisplayName="Get Inventory" Description=""></Command>
+        <Command Name="upload_firmware" DisplayName="Upload Firmware" Description=""></Command>
+    </Layout>
 </Driver>
