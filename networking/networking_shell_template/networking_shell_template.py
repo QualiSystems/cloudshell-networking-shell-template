@@ -85,7 +85,7 @@ class NetworkingShellTemplate(ResourceDriverInterface, NetworkingResourceDriverI
     # Save startup or running configuration to remote ftp
     def save(self, context, folder_path, configuration_type):
         """
-        Upload startup/running configs 
+        Upload startup/running configuration
         """
         filename = '<FILENAME>,'
         return filename
