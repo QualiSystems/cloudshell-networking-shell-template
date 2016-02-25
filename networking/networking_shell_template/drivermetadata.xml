@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Driver Name="Sample driver" Version="1.0.0" MainClass="networking_shell_template.NetworkingShellTemplate" Description="driver description">
+  <Layout>
+    <Category Name="Management">
+      <Command Name="send_custom_command" DisplayName="Send Custom Command" Description="show run">
+        <Parameters>
+          <Parameter Name="user_param1" Type="String" Mandatory = "False" DefaultValue="default" DisplayName="parameter 1" Description="Please specify a value here"/>
+          <Parameter Name="user_param2" Type="Lookup" Mandatory = "True" DefaultValue="Yes" AllowedValues="Yes,No" DisplayName="parameter 2" Description="Just another parameter"/>
+        </Parameters>
+      </Command>
+    </Category>
+    <Category Name="Hidden Commands">
+      <!-- All the commands listed under the "hidden commands" category will not be visible in the user interface, you can still call them from automation -->
+    </Category>
+    <Command Name="add_vlan" DisplayName="Add_VLAN" Description=""></Command>
+  </Layout>
+</Driver>
